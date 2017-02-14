@@ -90,9 +90,10 @@ void disp_Temp(int16_t temp_, uint8_t wait)
 		//buffer[8]='0'+fract;
 		buffer[6]=' ';
 		buffer[7]='C';
-		buffer[8]='\n';
+		buffer[8]=' ';
+		buffer[9]='\n';
 	}
-	USART_Append_To_Buffer(buffer,9,wait);
+	USART_Append_To_Buffer(buffer,10,wait);
 }
 
 void update(void)
