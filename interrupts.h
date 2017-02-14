@@ -6,8 +6,10 @@
 #include <avr/pgmspace.h>
 #include <stddef.h>
 
-#include "uart_interrupts.h"
 #include "global_variables.h"
+#include "pinout.h"
+#include "uart_interrupts.h"
+
 
 ISR(TIMER1_COMPA_vect)
 {

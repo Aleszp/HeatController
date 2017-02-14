@@ -2,11 +2,12 @@
 #include <stdint.h>
 #include <avr/io.h>
 
+#include "global_variables.h"
 #include "max6675.h"
+#include "other.h"
+#include "pinout.h"
 #include "spi.h"
 #include "uart.h"
-#include "pinout.h"
-#include "global_variables.h"
 
 int16_t get_Temp(void)
 {
@@ -17,7 +18,7 @@ int16_t get_Temp(void)
 		return 0xFFFF;
 	}
 	flags0&=~(1<<ERROR_NO_TC);
-	return (buff>>3);
+	return round16((buff>>3),2);
 }
 
 void measure_Temp(void)
@@ -30,7 +31,7 @@ void measure_Temp(void)
 		return;
 	}
 	flags0&=~(1<<ERROR_NO_TC);
-	buff>>=3;
+	buff>>=5;
 	temp_id++;
 	if(temp_id>=64)
 	{
@@ -45,7 +46,7 @@ void measure_Temp(void)
 
 void disp_Temp(int16_t temp_, uint8_t wait)
 {
-	char buffer[12];
+	char buffer[10];
 	if(flags0&(1<<ERROR_NO_TC))
 	{
 		buffer[0]='E';
@@ -64,9 +65,9 @@ void disp_Temp(int16_t temp_, uint8_t wait)
 		int8_t tmp=0;
 		buffer[0]=temp_>=0?'+':'-';
 		temp_*=temp_>=0?1:-1;
-		int8_t fract=(temp_&0b11)*25; //ułamkowa część (w ćwiartkach stopni celsjusza)
+		//int8_t fract=(temp_&0b11)*25; //ułamkowa część (w ćwiartkach stopni celsjusza)
 		
-		temp_>>=2;
+		//temp_>>=2;
 		
 		
 		tmp=temp_/10000;
@@ -82,16 +83,16 @@ void disp_Temp(int16_t temp_, uint8_t wait)
 		buffer[4]='0'+tmp;
 		temp_-=10*tmp;
 		buffer[5]='0'+temp_;
-		buffer[6]='.';
-		tmp=fract/10;
-		fract-=tmp*10;
-		buffer[7]='0'+tmp;
-		buffer[8]='0'+fract;
-		buffer[9]=' ';
-		buffer[10]='C';
-		buffer[11]='\n';
+		//buffer[6]='.';
+		//tmp=fract/10;
+		//fract-=tmp*10;
+		//buffer[7]='0'+tmp;
+		//buffer[8]='0'+fract;
+		buffer[6]=' ';
+		buffer[7]='C';
+		buffer[8]='\n';
 	}
-	USART_Append_To_Buffer(buffer,12,wait);
+	USART_Append_To_Buffer(buffer,9,wait);
 }
 
 void update(void)

@@ -2,11 +2,12 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-#include "pinout.h"
-#include "init.h"
-#include "uart.h"
-#include "spi.h"
+
 #include "global_variables.h"
+#include "init.h"
+#include "pinout.h"
+#include "spi.h"
+#include "uart.h"
 
 #define PRESKALER1 256
 

@@ -1,8 +1,8 @@
 #include <avr/io.h>
 #include <stdint.h>
 
-#include "spi.h"
 #include "pinout.h"
+#include "spi.h"
 
 void SPI_MasterInit(void)
 {

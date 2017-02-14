@@ -3,14 +3,14 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#include "pinout.h"
-#include "interrupts.h"
-#include "uart.h"
-#include "spi.h"
-#include "max6675.h"
 #include "init.h"
+#include "interrupts.h"
+#include "max6675.h"
+#include "other.h"
 #include "pid.h"
-#include "del40.h"
+#include "pinout.h"
+#include "spi.h"
+#include "uart.h"
 
 int main(void)
 {
