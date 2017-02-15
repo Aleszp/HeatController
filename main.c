@@ -27,7 +27,10 @@ int main(void)
 		
 		if(flags0&(1<<PRINT_TEMP))			//jeśli ustawiono flagę wyświetlenia aktualnej temperatury (ustawiana w przerwaniu na żądanie użytkownika)
 		{
-			disp_Temp(temp[temp_id],1);		//wyświetl aktualną temperaturę
+			//disp_Temp(temp[temp_id],1);		//wyświetl aktualną temperaturę
+			USART_Append_To_Buffer_uint32(time,1,1);
+			USART_Append_To_Buffer_int16(temp[temp_id],1,1);
+			USART_Append_To_Buffer_uint8(ocr_index,0,0);
 			flags0&=~(1<<PRINT_TEMP);		//odwołaj flagę wyświetlenia aktualnej temperatury
 		}
 		
@@ -67,20 +70,20 @@ int main(void)
 		if(flags0&(1<<PRINT_K))				//jeśli ustawiono flagę wyświetlenia parametrów PID (ustawiana w przerwaniu na żądanie użytkownika)
 		{
 			USART_Append_To_Buffer("Kp ",3,1);
-			USART_Append_To_Buffer_int8(Kp,1);
+			USART_Append_To_Buffer_int8(Kp,1,0);
 			USART_Append_To_Buffer("Ki ",3,1);
-			USART_Append_To_Buffer_int8(Ki,1);
+			USART_Append_To_Buffer_int8(Ki,1,0);
 			USART_Append_To_Buffer("Kd ",3,1);
-			USART_Append_To_Buffer_int8(Kd,0);
+			USART_Append_To_Buffer_int8(Kd,0,0);
 			flags0&=~(1<<PRINT_K);			//odwołaj flagę wyświetlenia parametrów PID
 		}
 		
 		if(flags0&(1<<PRINT_PID))			//jeśli ustawiono flagę wyświetlenia parametrów PID (ustawiana w przerwaniu na żądanie użytkownika)
 		{
 			USART_Append_To_Buffer("ocr_index ",10,1);
-			USART_Append_To_Buffer_uint8(ocr_index,1);
+			USART_Append_To_Buffer_uint8(ocr_index,1,0);
 			USART_Append_To_Buffer("ocr0 ",5,1);
-			USART_Append_To_Buffer_uint8(pgm_read_byte(&ocr[ocr_index]),0);
+			USART_Append_To_Buffer_uint8(pgm_read_byte(&ocr[ocr_index]),0,0);
 			flags0&=~(1<<PRINT_PID);		//odwołaj flagę wyświetlenia parametrów PID
 		}
 		

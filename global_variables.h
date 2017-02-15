@@ -14,6 +14,8 @@ extern const uint8_t tccr[3];
 extern volatile uint8_t ocr_index;		//indeks wybierający z tablicy ocr co wpisać do rejestru OCR0
 extern volatile uint8_t tccr_index;		//indeks wybierający z tablicy tccr co wpisać do rejestru TCCR0
 
+extern volatile int32_t time;
+
 //uart
 extern volatile char RXBuf[16];			//tablica odebranych znaków
 extern volatile char TXBuf[32];			//tablica znaków do wysłania

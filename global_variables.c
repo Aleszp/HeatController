@@ -43,6 +43,8 @@ const uint8_t tccr[3] PROGMEM = {(1<<WGM01)|(CS01<<1)|(CS00<<1),(1<<WGM01)|(CS02
 volatile uint8_t ocr_index=0;		//indeks wybierający z tablicy ocr co wpisać do rejestru OCR0
 volatile uint8_t tccr_index=0;		//indeks wybierający z tablicy tccr co wpisać do rejestru TCCR0
 
+volatile int32_t time=0;
+
 //uart
 volatile char RXBuf[16]=			//tablica odebranych znaków
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};

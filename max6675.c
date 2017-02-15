@@ -102,6 +102,7 @@ void update(void)
 	measure_Temp();						//zmierz temperaturę
 	calculate_Av_Temp();				//policz średnią temperaturę
 	//PORTA&=~(1<<LED);
+	time++;
 }
 
 void calculate_Av_Temp(void)
