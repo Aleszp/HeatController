@@ -14,7 +14,8 @@
 
 int main(void)
 {
-	init(12,1); 							//12 - 38.4k baud RS232 (przy 8MHz, wartość z noty katalogowej), 1 - pomiar temperatury co 1 sekundę
+	init(11,1); 							//11 - 57.6k baud RS232 (przy 11.0592MHz, wartość z noty katalogowej), 1 - pomiar temperatury co 1 sekundę
+											//51 dla baud = 9600, 12 dla baud=38.4k (F_Osc = 8MHz)
 	_delay_ms(100);
 	while(1)
 	{

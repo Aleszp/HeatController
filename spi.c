@@ -10,7 +10,7 @@ void SPI_MasterInit(void)
 	DDRB &= ~(1<<MISO);						//ustaw wejście dla linii MISO
 	PORTB=0xFF;								//podciągnij rezystory
 	
-	SPCR|=(1<<SPE)|(1<<MSTR); 				//aktywacja magistrali SPI, tryb Master, częstotliwość zegara SPI (2MHz) = 1/4 zegara oscylatora (8MHz) 
+	SPCR|=(1<<SPE)|(1<<MSTR); 				//aktywacja magistrali SPI, tryb Master, częstotliwość zegara SPI (2.7648MHz) = 1/4 zegara oscylatora (11.0592MHz) 
 	SPCR|=(1<<CPHA);						//odczyt na opadającym zboczu zegara
 	
 	SPCR&= ~(1<<DORD); 						//najpierw MSB, potem LSB
