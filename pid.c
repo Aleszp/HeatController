@@ -16,7 +16,7 @@ void calculate_PID(void)
 	
 	int32_t buffer=0;
 	buffer+=(temp_desired-temp[temp_id])*Kp;
-	//buffer+=(temp_iteg)*Ki;
+	buffer+=(temp_iteg)*Ki;
 	//buffer+=(temp_deriv)*Kd;
 	//sei();
 	//USART_Append_To_Buffer_int16((int16_t)buffer,1);

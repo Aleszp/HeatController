@@ -117,7 +117,7 @@ void calculate_Av_Temp(void)
 			buff+=temp[i];
 			temp_iteg+=temp_desired-temp[i];
 		}
-		temp_iteg/=tmp+quantity;
+		temp_iteg/=tmp_quantity;
 		if(tmp_quantity<8)
 		{
 			temp_deriv=(temp[temp_id]-temp[0]);

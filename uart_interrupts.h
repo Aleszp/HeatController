@@ -33,7 +33,7 @@ ISR (USART_RXC_vect)
 		RXBuf[0]=0;
 		RXBuf[1]=0;
 		RXBuf[2]=0;
-		Temp_iteg=0;
+		temp_iteg=0;
 	}
 	if((RXBuf[0]!=0x99)&&(RXBuf[0]!=0xDD)&&(rxindex>0))
 	{
