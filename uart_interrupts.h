@@ -1,8 +1,6 @@
 #ifndef _UART_INTERRUPTS_H_
 #define _UART_INTERRUPTS_H_
 
-#define BAUD 9600U
-
 #include <stdint.h>
 
 #include "max6675.h"
@@ -35,6 +33,7 @@ ISR (USART_RXC_vect)
 		RXBuf[0]=0;
 		RXBuf[1]=0;
 		RXBuf[2]=0;
+		Temp_iteg=0;
 	}
 	if((RXBuf[0]!=0x99)&&(RXBuf[0]!=0xDD)&&(rxindex>0))
 	{

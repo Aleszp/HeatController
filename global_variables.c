@@ -4,8 +4,8 @@
 #include "global_variables.h"
 
 //PID
-volatile int8_t Kp=127;				//mnożnik członu proporcjonalnego
-volatile int8_t Ki=0;				//mnożnik członu całkującego
+volatile int8_t Kp=64;				//mnożnik członu proporcjonalnego
+volatile int8_t Ki=8;				//mnożnik członu całkującego
 volatile int8_t Kd=0;				//mnożnik członu różniczkującego
 
 //timer0

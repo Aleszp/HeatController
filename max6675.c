@@ -40,7 +40,7 @@ void measure_Temp(void)
 			flags1&=~(1<<FIRST_MINUTE);
 	}
 	temp[temp_id]=buff;
-	temp_iteg+=temp_desired-buff;
+	//temp_iteg+=temp_desired-buff;
 	//PORTA&=~(1<<LED);					//zmień stan LEDa by zasygnalizować użytkownikowi, że "układ działa"
 }
 
@@ -115,7 +115,9 @@ void calculate_Av_Temp(void)
 		for(uint8_t i=0;i<tmp_quantity;i++)
 		{
 			buff+=temp[i];
+			temp_iteg+=temp_desired-temp[i];
 		}
+		temp_iteg/=tmp+quantity;
 		if(tmp_quantity<8)
 		{
 			temp_deriv=(temp[temp_id]-temp[0]);
@@ -133,7 +135,9 @@ void calculate_Av_Temp(void)
 	for(uint8_t i=0;i<64;i++)
 	{
 		buff+=temp[i];
+		temp_iteg+=temp_desired-temp[i];
 	}
+	temp_iteg>>=8;
 	temp_av=(buff>>6);
 	uint8_t tmp=temp_id-8;
 	if(tmp>=64)
