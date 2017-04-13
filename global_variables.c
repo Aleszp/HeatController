@@ -3,10 +3,12 @@
 
 #include "global_variables.h"
 
+//Składowa proporcjonalna do zadanej temperatury
+int8_t Kc=8;
 //PID
-volatile int8_t Kp=32;				//mnożnik członu proporcjonalnego
-volatile int8_t Ki=64;				//mnożnik członu całkującego
-volatile int8_t Kd=8;				//mnożnik członu różniczkującego
+int8_t Kp=32;				//mnożnik członu proporcjonalnego
+int8_t Ki=64;				//mnożnik członu całkującego
+int8_t Kd=8;				//mnożnik członu różniczkującego
 
 //timer0
 	/*Wartości do wpisania do rejestru OCR w zależności od potrzebnego opóźnienia (pierwsza i ostatnia wartość (0) są specjalne, dla 100% mocy reakcja

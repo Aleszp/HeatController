@@ -35,5 +35,6 @@ ISR(INT1_vect)
 		return;								//i zakończ przerwanie
 	}	
 	flags1|=(1<<TRIGGER);					//w pozostałych przypadkach
+}
 
 #endif
