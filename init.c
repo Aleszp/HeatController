@@ -17,7 +17,6 @@ void init(uint16_t baud, uint16_t freq)
 	INT1_Init();
 	SPI_MasterInit();
 	USART_Init(baud);				//51 dla baud = 9600, 12 dla baud=38.4k (F_Osc = 8MHz)
-	//TIMER0_Init();
 	TIMER1_Init(freq);
 	USART_Append_To_Buffer("INIT FINISHED\n",14,0);
 	
@@ -42,12 +41,6 @@ void INT1_Init(void)
 	MCUCR|=(1<<ISC11|1<<ISC10);		//Przerwanie INT1 dla zbocza narastającego na PD3
 	GICR|=(1<<INT1);
 }
-
-/*void TIMER0_Init(void)
-{
-	TIMSK|=(1<<OCIE0);
-	TCCR0|=(1<<WGM01);
-}*/
 
 void TIMER1_Init(uint16_t freq)		//freq - częstotliwość przerywania 
 {

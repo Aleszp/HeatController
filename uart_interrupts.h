@@ -80,13 +80,10 @@ ISR (USART_RXC_vect)
 	
 	if(rxindex>=16)
 		rxindex=0;
-		
-	//PORTA&=~(1<<LED);
 }
 
 ISR (USART_UDRE_vect) 
 {
-	//PORTA|=(1<<LED);					//zmień stan LEDa by zasygnalizować użytkownikowi, że "układ działa"
 	while(!(UCSRA&(1<<UDRE)));
 	if (txindex>0)
 	{
@@ -101,7 +98,6 @@ ISR (USART_UDRE_vect)
 	{ 
 		UCSRB &= ~(1<<UDRIE); 
 	}
-	//PORTA^=(1<<LED);					//zmień stan LEDa by zasygnalizować użytkownikowi, że "układ działa" 
 }
 
 #endif

@@ -28,7 +28,6 @@ int main(void)
 		
 		if(flags0&(1<<PRINT_TEMP))			//jeśli ustawiono flagę wyświetlenia aktualnej temperatury (ustawiana w przerwaniu na żądanie użytkownika)
 		{
-			//disp_Temp(temp[temp_id],1);		//wyświetl aktualną temperaturę
 			USART_Append_To_Buffer_uint32(time,1,1);
 			USART_Append_To_Buffer_int16(temp[temp_id],1,1);
 			USART_Append_To_Buffer_uint8(ocr_index,0,0);

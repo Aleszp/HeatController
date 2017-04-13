@@ -23,7 +23,6 @@ int16_t get_Temp(void)
 
 void measure_Temp(void)
 {
-	//PORTA|=(1<<LED);					//zmień stan LEDa by zasygnalizować użytkownikowi, że "układ działa"
 	int16_t buff=(SPI_MasterReceiveWord());
 	if(buff&0b100)
 	{
@@ -40,8 +39,6 @@ void measure_Temp(void)
 			flags1&=~(1<<FIRST_MINUTE);
 	}
 	temp[temp_id]=buff;
-	//temp_iteg+=temp_desired-buff;
-	//PORTA&=~(1<<LED);					//zmień stan LEDa by zasygnalizować użytkownikowi, że "układ działa"
 }
 
 void disp_Temp(int16_t temp_, uint8_t wait)
@@ -65,10 +62,6 @@ void disp_Temp(int16_t temp_, uint8_t wait)
 		int8_t tmp=0;
 		buffer[0]=temp_>=0?'+':'-';
 		temp_*=temp_>=0?1:-1;
-		//int8_t fract=(temp_&0b11)*25; //ułamkowa część (w ćwiartkach stopni celsjusza)
-		
-		//temp_>>=2;
-		
 		
 		tmp=temp_/10000;
 		buffer[1]='0'+tmp;
@@ -83,11 +76,6 @@ void disp_Temp(int16_t temp_, uint8_t wait)
 		buffer[4]='0'+tmp;
 		temp_-=10*tmp;
 		buffer[5]='0'+temp_;
-		//buffer[6]='.';
-		//tmp=fract/10;
-		//fract-=tmp*10;
-		//buffer[7]='0'+tmp;
-		//buffer[8]='0'+fract;
 		buffer[6]=' ';
 		buffer[7]='C';
 		buffer[8]=' ';
@@ -98,10 +86,8 @@ void disp_Temp(int16_t temp_, uint8_t wait)
 
 void update(void)
 { 
-	//PORTA|=(1<<LED);
 	measure_Temp();						//zmierz temperaturę
 	calculate_Av_Temp();				//policz średnią temperaturę
-	//PORTA&=~(1<<LED);
 	time++;
 }
 
