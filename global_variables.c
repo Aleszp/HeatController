@@ -6,7 +6,7 @@
 //PID
 volatile int8_t Kp=32;				//mnożnik członu proporcjonalnego
 volatile int8_t Ki=64;				//mnożnik członu całkującego
-volatile int8_t Kd=0;				//mnożnik członu różniczkującego
+volatile int8_t Kd=8;				//mnożnik członu różniczkującego
 
 //timer0
 	/*Wartości do wpisania do rejestru OCR w zależności od potrzebnego opóźnienia (pierwsza i ostatnia wartość (0) są specjalne, dla 100% mocy reakcja

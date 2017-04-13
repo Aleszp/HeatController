@@ -17,7 +17,7 @@ void calculate_PID(void)
 	int32_t buffer=0;
 	buffer+=(temp_desired-temp[temp_id])*Kp;
 	buffer+=(temp_iteg)*Ki;
-
+	buffer+=(temp_deriv)*Kd;
 	buffer/=16;
 	if(buffer>255)
 	{
