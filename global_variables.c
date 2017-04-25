@@ -4,7 +4,7 @@
 #include "global_variables.h"
 
 //Składowa proporcjonalna do zadanej temperatury
-int8_t Kc=4;
+int8_t Kc=8;
 //PID
 int8_t Kp=32;				//mnożnik członu proporcjonalnego
 int8_t Ki=64;				//mnożnik członu całkującego
