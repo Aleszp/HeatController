@@ -48,7 +48,7 @@ void USART_Append_To_Buffer_int8(int8_t src, uint8_t wait, uint8_t space)
 	TXBuf[2]='0'+tmp;	
 	src-=10*tmp;
 	TXBuf[1]='0'+src;
-	TXBuf[0]=space?' ':'\n';
+	TXBuf[0]=space?',':'\n';
 	
 	txindex=+5;
 	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
@@ -79,7 +79,7 @@ void USART_Append_To_Buffer_int16(int16_t src, uint8_t wait, uint8_t space)
 		src-=div*tmp;
 		div/=10;
 	}
-	TXBuf[0]=space?' ':'\n';
+	TXBuf[0]=space?',':'\n';
 	
 	txindex=+7;
 	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
@@ -101,7 +101,7 @@ void USART_Append_To_Buffer_uint8(uint8_t src, uint8_t wait, uint8_t space)
 	TXBuf[2]='0'+tmp;	
 	src-=10*tmp;
 	TXBuf[1]='0'+src;
-	TXBuf[0]=space?' ':'\n';
+	TXBuf[0]=space?',':'\n';
 	txindex=+4;
 	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
 	if(wait)
@@ -122,7 +122,7 @@ void USART_Append_To_Buffer_uint32(int32_t src, uint8_t wait, uint8_t space)
 		src-=div*tmp;
 		div/=10;
 	}
-	TXBuf[0]=space?' ':'\n';
+	TXBuf[0]=space?',':'\n';
 	txindex=+11;
 	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
 	if(wait)
