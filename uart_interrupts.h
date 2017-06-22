@@ -12,60 +12,62 @@ ISR (USART_RXC_vect)
 {
 	RXBuf[rxindex] = UDR;
 	rxindex++;
-	if(RXBuf[0]==0xFF)
-	{
-		flags0|=(1<<PRINT_TEMP);
-		rxindex=0;
-		RXBuf[0]=0;
-	}
-	if(RXBuf[0]==0xEE)
+	if(RXBuf[0]=='A')
 	{
 		flags0|=(1<<PRINT_AV);
 		rxindex=0;
 		RXBuf[0]=0;
 	}
-	if(RXBuf[0]==0xDD&&rxindex>2)
+	if(RXBuf[0]=='T'&&rxindex>3)
 	{
-		temp_desired=RXBuf[2];
-		temp_desired|=(RXBuf[1]<<8);
+		temp_desired=(RXBuf[1]-'0')*100;
+		temp_desired+=(RXBuf[2]-'0')*10;
+		temp_desired+=(RXBuf[3]-'0');
 		rxindex=0;
 		RXBuf[0]=0;
 		RXBuf[1]=0;
 		RXBuf[2]=0;
 		temp_iteg=0;
 	}
-	if((RXBuf[0]!=0x99)&&(RXBuf[0]!=0xDD)&&(rxindex>0))
+	if((RXBuf[0]!='P')&&(RXBuf[0]!='T')&&(rxindex>0))
 	{
 		RXBuf[rxindex]=0;
 		rxindex--;
 	}
-	if(RXBuf[0]==0xCC)
+	if(RXBuf[0]=='D')
 	{
 		flags0|=(1<<PRINT_DES);
 		rxindex=0;
 		RXBuf[0]=0;
 	}
-	if(RXBuf[0]==0xBB)
+	if(RXBuf[0]=='K')
 	{
 		flags0|=(1<<PRINT_K);
 		rxindex=0;
 		RXBuf[0]=0;
 	}
-	if(RXBuf[0]==0xAA)
+	if(RXBuf[0]=='S')
 	{
 		flags0|=(1<<PRINT_PID);
 		rxindex=0;
 		RXBuf[0]=0;
 	}
-	if(RXBuf[0]==0x11)
+	if(RXBuf[0]=='R')
 	{
 		flags1|=(1<<RESET);
 		rxindex=0;
 		RXBuf[0]=0;
 	}
-	if(RXBuf[0]==0x99&&rxindex>1)
+	if(RXBuf[0]=='P'&&rxindex>3)
 	{
-		ocr_index=RXBuf[1];
+		uint16_t tmp16=(RXBuf[1]-'0')*100;
+		tmp16+=(RXBuf[2]-'0')*10;
+		tmp16+=(RXBuf[3]-'0');
+		
+		if(tmp16<=255)
+			ocr_index=tmp16;
+		else
+			ocr_index=255;
 		rxindex=0;
 		RXBuf[0]=0;
 		RXBuf[1]=0;
