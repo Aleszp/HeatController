@@ -29,11 +29,6 @@ ISR (USART_RXC_vect)
 		RXBuf[2]=0;
 		temp_iteg=0;
 	}
-	if((RXBuf[0]!='P')&&(RXBuf[0]!='T')&&(rxindex>0))
-	{
-		RXBuf[rxindex]=0;
-		rxindex--;
-	}
 	if(RXBuf[0]=='D')
 	{
 		flags0|=(1<<PRINT_DES);
@@ -55,6 +50,12 @@ ISR (USART_RXC_vect)
 	if(RXBuf[0]=='R')
 	{
 		flags1|=(1<<RESET);
+		rxindex=0;
+		RXBuf[0]=0;
+	}
+	if(RXBuf[0]=='?')
+	{
+		flags1|=(1<<HELP);
 		rxindex=0;
 		RXBuf[0]=0;
 	}
@@ -84,6 +85,12 @@ ISR (USART_RXC_vect)
 		}
 		tccr_index=1;
 	}	
+	
+	if((RXBuf[0]!='P')&&(RXBuf[0]!='T')&&(rxindex>0))
+	{
+		RXBuf[rxindex]=0;
+		rxindex--;
+	}
 	
 	if(rxindex>=16)					//jeśli przepełni się bufor
 		rxindex=0;					//opróżnij go (zezwól na jego nadpisywanie od początku)

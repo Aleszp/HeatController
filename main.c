@@ -27,7 +27,7 @@ int main(void)
 			flags0|=(1<<PRINT_TEMP);
 		}
 		
-		if(flags0&(1<<PRINT_TEMP))			//jeśli ustawiono flagę wyświetlenia aktualnej temperatury (ustawiana w przerwaniu na żądanie użytkownika)
+		if(flags0&(1<<PRINT_TEMP))			//jeśli ustawiono flagę wyświetlenia aktualnej temperatury (ustawiana głównej pętli programu co 1 sekundę)
 		{
 			USART_Append_To_Buffer_uint32(time,1,1);
 			USART_Append_To_Buffer_int16(temp[temp_id],1,1);
@@ -68,7 +68,7 @@ int main(void)
 			PORTA&=~(1<<LED);
 		}
 		
-		if(flags0&(1<<PRINT_K))				//jeśli ustawiono flagę wyświetlenia parametrów PID (ustawiana w przerwaniu na żądanie użytkownika)
+		if(flags0&(1<<PRINT_K))				//jeśli ustawiono flagę wyświetlenia współczynników PID (ustawiana w przerwaniu na żądanie użytkownika)
 		{
 			USART_Append_To_Buffer("Kp ",3,1);
 			USART_Append_To_Buffer_int8(Kp,1,0);
@@ -104,6 +104,16 @@ int main(void)
 			cli();							//wyłącz obsługę przerwań (by uniknąć problemów z np komunikacją z PC)
 			wdt_enable(WDTO_15MS);			//włącz zegar watchdog z najkrótszym okresem (ok 15ms)
 			while(1) {}						//utknij w nieskończonej pętli aż do restartu watchdoga
+		}
+		if(flags1&(1<<HELP))				//jeśli ustawiono flagę wyświetlenia pomocy
+		{
+			USART_Append_To_Buffer("Znane rozkazy:\n",15,1);
+			USART_Append_To_Buffer("A - wysw sr temp\n",17,1);
+			USART_Append_To_Buffer("Txxx - ustaw temp xxx\n",22,1);
+			USART_Append_To_Buffer("D - wysw temp docel\n",20,1);
+			USART_Append_To_Buffer("R - restart\n",12,1);
+			USART_Append_To_Buffer("? - wysw pomoc\n",15,0);
+			flags1&=~(1<<HELP);				//odwołaj flagę wyświetlenia pomocy
 		}
 	}
 }

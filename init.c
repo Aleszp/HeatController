@@ -19,10 +19,12 @@ void init(uint16_t baud, uint16_t freq)
 	SPI_MasterInit();
 	USART_Init(baud);				//51 dla baud = 9600, 12 dla baud=38.4k (F_Osc = 8MHz)
 	TIMER1_Init(freq);
-	USART_Append_To_Buffer("INIT FINISHED\n",14,0);	//poinformuj użytkownika o zakończonej inicjalizacji
-	
 	flags1|=(1<<FIRST_MINUTE);		//Ustaw flagę pierwszej minuty (ważne dla funkcji liczących całkę z temperatury)
 	sei();
+	USART_Append_To_Buffer("INICJALIZACJA ZAKONCZONA\n",25,1);	//poinformuj użytkownika o zakończonej inicjalizacji
+	USART_Append_To_Buffer("? - wyswietla pomoc\n",20,1);
+	USART_Append_To_Buffer("\tt/s,\tT/C,\tP[0-255]\n",20,0);
+
 }
 
 void Ports_Init(void)

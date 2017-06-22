@@ -37,18 +37,19 @@ extern volatile uint8_t flags0;			//flagi (w razie potrzeby zostaną utworzone k
 extern volatile uint8_t flags1;			//co jest wydajniejsze niż jedna flaga 8*n bitowa)
 
 //definicje przesunięć bitowych flag
-#define MEASURE      0
-#define PRINT_TEMP   1
-#define PRINT_AV     2
-#define PRINT_DES    3
-#define PRINT_K 	 4
-#define PRINT_PID 	 5
-#define PRINT_NO_TC  6
-#define ERROR_NO_TC  7
-#define COUNT_PID    0
-#define FIRST_MINUTE 1
-#define TRIGGER		 2
-#define RESET		 3
+#define MEASURE     	0
+#define PRINT_TEMP  	1
+#define PRINT_AV    	2
+#define PRINT_DES   	3
+#define PRINT_K 		4
+#define PRINT_PID 		5
+#define PRINT_NO_TC 	6
+#define ERROR_NO_TC 	7
+#define COUNT_PID   	0
+#define FIRST_MINUTE	1
+#define TRIGGER			2
+#define RESET			3
+#define HELP			4
 
 
 #endif
