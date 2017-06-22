@@ -60,7 +60,7 @@ ISR (USART_RXC_vect)
 	}
 	if(RXBuf[0]==0x11)
 	{
-		flags0|=(1<<RESET);
+		flags1|=(1<<RESET);
 		rxindex=0;
 		RXBuf[0]=0;
 	}
