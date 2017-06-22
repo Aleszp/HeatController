@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <avr/wdt.h> 
 
 #include "init.h"
 #include "interrupts.h"
@@ -97,6 +98,12 @@ int main(void)
 		{
 			calculate_PID();				//policz parametry PID
 			flags1&=~(1<<COUNT_PID);		//odwołaj flagę obliczania parametrów PID
+		}
+		if(flags1&(1<<RESET))				//jeśli ustawiono flagę programowego restartu
+		{
+			cli();							//wyłącz obsługę przerwań (by uniknąć problemów z np komunikacją z PC)
+			wdt_enable(WDTO_15MS);			//włącz zegar watchdog z najkrótszym okresem (ok 15ms)
+			while(1) {}						//utknij w nieskończonej pętli aż do restartu watchdoga
 		}
 	}
 }

@@ -58,6 +58,12 @@ ISR (USART_RXC_vect)
 		rxindex=0;
 		RXBuf[0]=0;
 	}
+	if(RXBuf[0]==0x11)
+	{
+		flags0|=(1<<RESET);
+		rxindex=0;
+		RXBuf[0]=0;
+	}
 	if(RXBuf[0]==0x99&&rxindex>1)
 	{
 		ocr_index=RXBuf[1];

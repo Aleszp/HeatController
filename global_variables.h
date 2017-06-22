@@ -48,7 +48,7 @@ extern volatile uint8_t flags1;			//co jest wydajniejsze niż jedna flaga 8*n bi
 #define COUNT_PID    0
 #define FIRST_MINUTE 1
 #define TRIGGER		 2
-
+#define RESET		 3
 
 
 #endif

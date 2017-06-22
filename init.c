@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
-
+#include <avr/wdt.h> 
 
 #include "global_variables.h"
 #include "init.h"
@@ -13,6 +13,7 @@
 
 void init(uint16_t baud, uint16_t freq)
 {
+	wdt_disable();
 	Ports_Init();
 	INT1_Init();
 	SPI_MasterInit();
