@@ -10,7 +10,6 @@
 
 ISR (USART_RXC_vect) 
 {
-	//PORTA|=(1<<LED);
 	RXBuf[rxindex] = UDR;
 	rxindex++;
 	if(RXBuf[0]==0xFF)
@@ -84,25 +83,25 @@ ISR (USART_RXC_vect)
 		tccr_index=1;
 	}	
 	
-	if(rxindex>=16)
-		rxindex=0;
+	if(rxindex>=16)					//jeśli przepełni się bufor
+		rxindex=0;					//opróżnij go (zezwól na jego nadpisywanie od początku)
 }
 
 ISR (USART_UDRE_vect) 
 {
 	while(!(UCSRA&(1<<UDRE)));
-	if (txindex>0)
+	if (txindex>0)					//jeśli są dane do wysłania
 	{
-		if(TXBuf[txindex-1]!=0x00)
-			UDR=TXBuf[txindex-1];
+		if(TXBuf[txindex-1]!=0x00) 	//jeśli to nie jest znak "końca linii"
+			UDR=TXBuf[txindex-1];  	//prześlij go dalej
 		else
-			UDR='\n';
+			UDR='\n';				//wyślij (prawdziwy) znak końca linii
 		TXBuf[txindex-1]=0;
 		txindex--;
 	}
-	else 
-	{ 
-		UCSRB &= ~(1<<UDRIE); 
+	else 							//jeśli już nie ma nic do wysłania
+	{
+		UCSRB &= ~(1<<UDRIE);		//zablokuj to przerwanie 
 	}
 }
 
