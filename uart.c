@@ -17,7 +17,7 @@ void USART_Init(uint16_t baud)
 
 void USART_Append_To_Buffer(char* src, uint8_t len, uint8_t wait)
 {
-	UCSRB &= ~(1<<UDRIE); 	//zablokuj wysyłanie na czas tej operacji
+	uart_disable_send();
 	
 	uint8_t len_=len-1;
 	
@@ -26,7 +26,7 @@ void USART_Append_To_Buffer(char* src, uint8_t len, uint8_t wait)
 		TXBuf[len_-ii]=src[ii];
 	}
 	txindex=+len;
-	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
+	uart_enable_send();
 	if(wait)
 	{
 		while(txindex>0);
@@ -35,7 +35,7 @@ void USART_Append_To_Buffer(char* src, uint8_t len, uint8_t wait)
 
 void USART_Append_To_Buffer_int8(int8_t src, uint8_t wait, uint8_t space)
 {
-	UCSRB &= ~(1<<UDRIE); 	//zablokuj wysyłanie na czas tej operacji
+	uart_disable_send();	
 	int8_t tmp=src;
 	int8_t sign=(src<0);
 	if(sign)
@@ -51,7 +51,7 @@ void USART_Append_To_Buffer_int8(int8_t src, uint8_t wait, uint8_t space)
 	TXBuf[0]=space?',':'\n';
 	
 	txindex=+5;
-	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
+	uart_enable_send();
 	if(wait)
 	{
 		while(txindex>0);
@@ -60,7 +60,7 @@ void USART_Append_To_Buffer_int8(int8_t src, uint8_t wait, uint8_t space)
 
 void USART_Append_To_Buffer_int16(int16_t src, uint8_t wait, uint8_t space)
 {
-	UCSRB &= ~(1<<UDRIE); 	//zablokuj wysyłanie na czas tej operacji
+	uart_disable_send();	
 	int16_t tmp=src;
 	if(src<0)
 	{
@@ -82,7 +82,7 @@ void USART_Append_To_Buffer_int16(int16_t src, uint8_t wait, uint8_t space)
 	TXBuf[0]=space?',':'\n';
 	
 	txindex=+7;
-	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
+	uart_enable_send();
 	if(wait)
 	{
 		while(txindex>0);
@@ -91,7 +91,7 @@ void USART_Append_To_Buffer_int16(int16_t src, uint8_t wait, uint8_t space)
 
 void USART_Append_To_Buffer_uint8(uint8_t src, uint8_t wait, uint8_t space)
 {
-	UCSRB &= ~(1<<UDRIE); 	//zablokuj wysyłanie na czas tej operacji
+	uart_disable_send();	
 	uint8_t tmp=src;
 	
 	tmp=src/100;
@@ -103,7 +103,7 @@ void USART_Append_To_Buffer_uint8(uint8_t src, uint8_t wait, uint8_t space)
 	TXBuf[1]='0'+src;
 	TXBuf[0]=space?',':'\n';
 	txindex=+4;
-	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
+	uart_enable_send();
 	if(wait)
 	{
 		while(txindex>0);
@@ -112,7 +112,7 @@ void USART_Append_To_Buffer_uint8(uint8_t src, uint8_t wait, uint8_t space)
 
 void USART_Append_To_Buffer_uint32(int32_t src, uint8_t wait, uint8_t space)
 {
-	UCSRB &= ~(1<<UDRIE); 	//zablokuj wysyłanie na czas tej operacji
+	uart_disable_send();	
 	int32_t tmp=src;
 	int32_t div=1000000000;
 	for(uint8_t ii=10;ii>0;ii--)
@@ -124,7 +124,7 @@ void USART_Append_To_Buffer_uint32(int32_t src, uint8_t wait, uint8_t space)
 	}
 	TXBuf[0]=space?',':'\n';
 	txindex=+11;
-	UCSRB |= (1<<UDRIE);  	//odblokuj wysyłanie
+	uart_enable_send();
 	if(wait)
 	{
 		while(txindex>0);
