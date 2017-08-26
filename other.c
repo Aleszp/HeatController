@@ -19,7 +19,7 @@ uint16_t round16(uint16_t src,uint8_t bits)
 
 void restart(void)
 {
-	cli();							//wyłącz obsługę przerwań (by uniknąć problemów z np komunikacją z PC)
-	wdt_enable(WDTO_15MS);			//włącz zegar watchdog z najkrótszym okresem (ok 15ms)
-	while(1) {}						//utknij w nieskończonej pętli aż do restartu watchdoga
+	cli();									//wyłącz obsługę przerwań (by uniknąć problemów z np komunikacją z PC)
+	wdt_enable(WDTO_15MS);					//włącz zegar watchdog z najkrótszym okresem (ok 15ms)
+	while(1) {}								//utknij w nieskończonej pętli aż do restartu watchdoga
 }

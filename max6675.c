@@ -12,7 +12,7 @@
 int16_t get_Temp(void)
 {
 	int16_t buff=(SPI_MasterReceiveWord());
-	if(buff&0b100)
+	if(buff&(1<<2))
 	{
 		flags0|=(1<<ERROR_NO_TC);
 		return 0xFFFF;
@@ -24,7 +24,7 @@ int16_t get_Temp(void)
 void measure_Temp(void)
 {
 	int16_t buff=(SPI_MasterReceiveWord());
-	if(buff&0b100)
+	if(buff&(1<<2))
 	{
 		flags0|=(1<<ERROR_NO_TC)|(1<<PRINT_NO_TC);
 		return;
