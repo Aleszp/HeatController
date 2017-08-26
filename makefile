@@ -42,6 +42,12 @@ $(TARGET).o:	$(TARGET).c interrupts.h uart_interrupts.h global_variables.h pinou
 
 program: $(TARGET).hex $(TARGET).eep
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+	
+fuse: 
+	#Ustaw fuse-bity
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -U lfuse:w:0xFF:m -U hfuse:w:0x99:m -U efuse:w:0xFF:m
+	#Sprawdź poprawność fuse-bitów
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -U lfuse:v:0xFF:m -U hfuse:v:0x99:m -U efuse:v:0xFF:m
 
 clean:
 	rm -f *.o
