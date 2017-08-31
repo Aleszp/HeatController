@@ -19,7 +19,7 @@ void calculate_PID(void)
 	buffer+=(temp_desired-temp[temp_id])*Kp;
 	buffer+=(temp_iteg)*Ki;
 	buffer+=(temp_deriv)*Kd;
-	buffer/=16;
+	buffer/=denominator;
 	if(buffer>255)
 	{
 		ocr_index=255;

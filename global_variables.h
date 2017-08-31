@@ -9,6 +9,7 @@ extern int8_t Kc;
 extern int8_t Kp;				//mnożnik członu proporcjonalnego
 extern int8_t Ki;				//mnożnik członu całkującego
 extern int8_t Kd;				//mnożnik członu różniczkującego
+extern int8_t denominator;		//wspólny mianownik
 
 //timer0
 extern const uint8_t ocr[256];
