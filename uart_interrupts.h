@@ -73,32 +73,6 @@ ISR (USART_RXC_vect)
 		rxindex=0;
 		RXBuf[0]=0;
 	}
-	/*if(RXBuf[0]=='P'&&rxindex>3)
-	{
-		uint16_t tmp16=(RXBuf[1]-'0')*100;
-		tmp16+=(RXBuf[2]-'0')*10;
-		tmp16+=(RXBuf[3]-'0');
-		
-		if(tmp16<=255)
-			ocr_index=tmp16;
-		else
-			ocr_index=255;
-		rxindex=0;
-		RXBuf[0]=0;
-		RXBuf[1]=0;
-		if(ocr_index<20)
-		{
-			tccr_index=0;
-			return;
-		}
-	
-		if(ocr_index>229)
-		{
-			tccr_index=2;
-			return;
-		}
-		tccr_index=1;
-	}	*/
 	
 	if((!(RXBuf[0]!='T'||RXBuf[0]!='P'||RXBuf[0]!='C'||RXBuf[0]!='Q'||RXBuf[0]!='M'))&&(rxindex>0))
 	{
