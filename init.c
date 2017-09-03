@@ -2,6 +2,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <avr/wdt.h> 
+#include <avr/pgmspace.h>
 
 #include "global_variables.h"
 #include "init.h"
@@ -21,9 +22,9 @@ void init(uint16_t baud, uint16_t freq)
 	TIMER1_Init(freq);
 	flags1|=(1<<FIRST_MINUTE);		//Ustaw flagę pierwszej minuty (ważne dla funkcji liczących całkę z temperatury)
 	sei();
-	USART_Append_To_Buffer("INICJALIZACJA ZAKONCZONA\n",25,1);	//poinformuj użytkownika o zakończonej inicjalizacji
-	USART_Append_To_Buffer("? - wyswietla pomoc\n",20,1);
-	USART_Append_To_Buffer("\tt/s,\tT/C,\tP[0-255]\n",20,0);
+	USART_Append_To_Buffer(PSTR("INICJALIZACJA ZAKONCZONA\n"),25,1);	//poinformuj użytkownika o zakończonej inicjalizacji
+	USART_Append_To_Buffer(PSTR("? - wyswietla pomoc\n"),20,1);
+	USART_Append_To_Buffer(PSTR("\tt/s,\tT/C,\tP[0-255]\n"),20,0);
 
 }
 

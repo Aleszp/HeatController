@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/pgmspace.h>
 
 #include "global_variables.h"
 #include "uart.h"
@@ -15,7 +16,7 @@ void USART_Init(uint16_t baud)
 	UCSRB |= (1<<RXCIE);											//odblokuj przerwanie po odebraniu bajtu
 }
 
-void USART_Append_To_Buffer(char* src, uint8_t len, uint8_t wait)
+void USART_Append_To_Buffer(const char const* src, uint8_t len, uint8_t wait)
 {
 	uart_disable_send();
 	

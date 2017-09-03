@@ -1,0 +1,5 @@
+#ignoruj pliki obiektowe
+*.o
+*.hex
+*.elf
+*.eep
