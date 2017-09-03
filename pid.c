@@ -19,7 +19,7 @@ void calculate_PID(void)
 	buffer+=(temp_desired-temp[temp_id])*Kp;
 	buffer+=(temp_iteg)*Ki;
 	buffer+=(temp_deriv)*Kd;
-	buffer/=denominator;
+	buffer/=denominator;		//teoretycznie zamiast dzielenia mógłbym zastosować przesunięcie bitowe, ale przyrost wydajności byłby niewielki w porównaniu z ograniczeniem do dzielenia wyłącznie przez potęgi liczby 2
 	if(buffer>255)
 	{
 		ocr_index=255;

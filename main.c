@@ -107,7 +107,11 @@ int main(void)
 		{
 			USART_Append_To_Buffer(PSTR("Znane rozkazy:\n"),15,1);
 			USART_Append_To_Buffer(PSTR("A - wysw sr temp\n"),17,1);
-			USART_Append_To_Buffer(PSTR("Txxx - ustaw temp xxx\n"),22,1);
+			USART_Append_To_Buffer(PSTR("Txxx - ustaw temp = xxx\n"),24,1);
+			USART_Append_To_Buffer(PSTR("Pxxx - ustaw Kp = xxx\n"),22,1);
+			USART_Append_To_Buffer(PSTR("Cxxx - ustaw Ki = xxx\n"),22,1);
+			USART_Append_To_Buffer(PSTR("Qxxx - ustaw Kd = xxx\n"),22,1);
+			USART_Append_To_Buffer(PSTR("Mxxx - ustaw mianownik = xxx\n"),29,1);
 			USART_Append_To_Buffer(PSTR("D - wysw temp docel\n"),20,1);
 			USART_Append_To_Buffer(PSTR("R - restart\n"),12,1);
 			USART_Append_To_Buffer(PSTR("? - wysw pomoc\n"),15,0);
