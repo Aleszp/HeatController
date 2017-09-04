@@ -18,13 +18,11 @@ ISR (USART_RXC_vect)
 		rxindex=0;
 		RXBuf[0]=0;
 	}
-	if(rxindex>3&&(RXBuf[0]!='T'||RXBuf[0]!='P'||RXBuf[0]!='C'||RXBuf[0]!='Q'||RXBuf[0]!='M'))
+	if(rxindex>=4&&(RXBuf[0]!='T'||RXBuf[0]!='P'||RXBuf[0]!='C'||RXBuf[0]!='Q'||RXBuf[0]!='M'))
 	{
 		uint16_t tmp=(RXBuf[1]-'0')*100;
 		tmp+=(RXBuf[2]-'0')*10;
 		tmp+=(RXBuf[3]-'0');
-		rxindex=0;
-		
 		
 		if(RXBuf[0]=='T')
 		{	
@@ -50,6 +48,7 @@ ISR (USART_RXC_vect)
 		RXBuf[0]=0;
 		RXBuf[1]=0;
 		RXBuf[2]=0;
+		rxindex=0;
 	}
 	if(RXBuf[0]=='D')
 	{
@@ -82,13 +81,13 @@ ISR (USART_RXC_vect)
 		RXBuf[0]=0;
 	}
 	
-	if((!(RXBuf[0]!='T'||RXBuf[0]!='P'||RXBuf[0]!='C'||RXBuf[0]!='Q'||RXBuf[0]!='M'))&&(rxindex>0))
+	if((!(RXBuf[0]=='T'||RXBuf[0]=='P'||RXBuf[0]=='C'||RXBuf[0]=='Q'||RXBuf[0]=='M'))&&(rxindex>0))
 	{
 		RXBuf[rxindex]=0;
-		rxindex--;
+		rxindex=0;
 	}
 	
-	if(rxindex>=16)					//jeśli przepełni się bufor
+	if(rxindex>=15)					//jeśli przepełni się bufor
 		rxindex=0;					//opróżnij go (zezwól na jego nadpisywanie od początku)
 }
 
