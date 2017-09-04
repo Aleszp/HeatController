@@ -25,10 +25,18 @@ ISR (USART_RXC_vect)
 		tmp+=(RXBuf[3]-'0');
 		rxindex=0;
 		
+		
 		if(RXBuf[0]=='T')
 		{	
+			if(tmp>999)
+				tmp=0;
 			temp_iteg=0;
 			temp_desired=tmp;
+		}
+		else
+		{
+			if(tmp>255)
+				tmp=0;
 		}
 		if(RXBuf[0]=='P')
 			Kp=tmp;
